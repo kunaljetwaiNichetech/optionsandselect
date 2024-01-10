@@ -2,37 +2,33 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import "./Style.css";
 import { data } from "./Data";
+import SelectedOption from "./Optionssssssss";
 export default function Options() {
   // let [Data, setData] = useState([]);
   let [City, setCity] = useState("");
+  let [Selectedcountry, setSelectedcountry] = useState("");
   let [capital, setcapital] = useState("");
   const handelchange = (e) => {
-    setCity(e.target.value);
-
-    setcapital(data.find((ctr) => ctr.name === e.target.value).citsies);
-    // if (City === "Albania") {
-    //   console.log("this is albania");
-    // } else if (City === "Afghanistan") {
-    //   debugger;
-    //   console.log("this is Afghanistan");
-  };
-  const handelchangecity = (e) => {
-    console.log("working");
+    const Selectedcountry = e.target.value;
+    setSelectedcountry(Selectedcountry);
+    setCity("");
+    setcapital(data.find((ctr) => ctr.name === e.target.value)?.citsies || []);
+    // if (e.target.value) {
+    //   setcapital(data.find((ctr) => ctr.name === e.target.value).citsies);
+    // } else {
+    //   setcapital("");
+    // }
+    // console.log("this is e.tareget value", !e.target.value);
   };
 
   console.log(City);
   console.log(capital);
 
-  // const capitals = Data.map((item) => {
-  //   return item.capital;
-  // });
   useEffect(() => {
-    fetch("https://countriesnow.space/api/v0.1/countries/capital")
+    fetch("https://reqres.in/api/users?page=1")
       .then((res) => res.json())
       .then((res) => console.log(res));
   });
-
-  // console.log(capitals);
 
   return (
     <div>
@@ -42,27 +38,32 @@ export default function Options() {
       >
         {color}
       </div> */}
-      <select onChange={handelchange}>
+      <select onChange={handelchange} value={Selectedcountry}>
         <option value="">select state</option>
         {data &&
           data.map((item, i) => (
             <>
-              {/* <option value="">select state</option> */}
-              <option value={item.name}>{item.name}</option>
-              {/* <option value="default">chose an option</option> */}
+              <option key={item.name} value={item.name}>
+                {item.name}
+              </option>
             </>
           ))}
       </select>
       <br />
-      <select onChange={handelchangecity}>
+      <select onChange={(e) => setCity(e.target.value)} value={City}>
+        <option value="">select city</option>
         {capital &&
           capital.map((item, i) => (
             <>
-              <option value={item}>{item}</option>
-              {/* <option value="default">chose an option</option> */}
+              <option key={item} value={item}>
+                {item}
+              </option>
             </>
           ))}
       </select>
     </div>
+    // <div>
+    //   <SelectedOption />
+    // </div>
   );
 }

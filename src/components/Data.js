@@ -11,11 +11,8 @@ let data=[{
     name:"Rajasthan",
     citsies:["Jaipur","udaipur","bikaner","alwar"]
 },{
-    name:"West Bengal",
+    name:"WestBengal",
     citsies:["Nadia","Asanosal","siliguri","Darjaling"]
 }
-,{
-    name:"",
-    citsies:[""]
-}]
+]
 export {data}
