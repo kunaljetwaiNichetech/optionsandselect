@@ -12,13 +12,19 @@ export default function Options() {
   let [capital, setcapital] = useState([]);
   useEffect(() => {
     let retrivval = JSON.parse(localStorage.getItem("dropdata"));
+    // JSON.parse () is important  so that to get data back in json format
     console.log(retrivval);
     if (retrivval) {
-      // setSelectedcountry(retrivval.statee);
-      setcapital(retrivval.statee);
+      setSelectedcountry(retrivval.statee);
+      setCity(retrivval.city);
+
+      setcapital(
+        data.find((ctr) => ctr.name === retrivval.statee)?.citsies || []
+      );
+      // localStorage.clear();
     }
     // setcapital(retrivval.statee);
-  });
+  }, []);
   const handelchange = (e) => {
     const Selectedcountry = e.target.value;
     setSelectedcountry(Selectedcountry);
@@ -35,11 +41,11 @@ export default function Options() {
   const handelchangecity = (e) => {
     // let d = setCity(data.find((ctr) => ctr.citsies === e.target.value).citsies);
     let d = e.target.value;
-    debugger;
 
     let disp = { city: d, statee: Selectedcountry };
     location("/display", { state: disp });
     localStorage.setItem("dropdata", JSON.stringify(disp));
+    //JSON.stringify is important beace to save the te data from object to string in localstorage
   };
   console.log(City);
   console.log(capital);

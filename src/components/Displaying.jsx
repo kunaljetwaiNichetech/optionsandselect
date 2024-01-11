@@ -9,7 +9,7 @@ export default function Displaying() {
     <div>
       <h1>displaying the details</h1>
       <h2>the state you selected: {value.statee}</h2>
-      {/* <h2>the city you selected: {value.city}</h2> */}
+      <h2>the city you selected: {value.city}</h2>
     </div>
   );
 }
